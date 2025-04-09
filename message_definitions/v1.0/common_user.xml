@@ -1,0 +1,1085 @@
+<?xml version="1.0"?>
+<mavlink>
+  <include>common.xml</include>
+  <dialect>2</dialect>
+  <enums>
+    <enum name="MAV_CMD">
+      <description>Commands to be executed by the YUNEEC MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data.</description>
+      <entry value="32768" name="MAV_CMD_FLIGHT_TASK">
+        <description>advance function flying mode command</description>
+        <param index="1">advance function mode(see FLIGHT_TASK enum)</param>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="32769" name="MAV_CMD_SMART_BATTERY">
+        <description>Command of host to battery.</description>
+        <param index="1">Command ID for smart battery, as define by enum COMMAND_LIST</param>
+        <param index="2">Communication status, 0 indicates not work, 1 indicates work.</param>
+        <param index="3">Synchronize status, 0 indicates not asynchronous, 1 indicates synchronous.</param>
+        <param index="4">Flying check, 0 indicates not flying, 1 indicates flying.</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="32770" name="MAV_CMD_OPTICAL_FLOW_UPGRADE">
+        <description>Start the optical flow upgrade command.</description>
+        <param index="1">=0,Stop the optical flow upgrade;=1,Start the optical flow upgrade</param>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="32771" name="MAV_CMD_TEAM_MODE">
+        <description>Switch Team Mode ON/OFF; OFF: One remote controls aircraft and gimbal; ON: The master remote controls the aircraft, the slave remote controls the gimbal.</description>
+        <param index="1">0 = OFF Team Mode; 1 = ON Team Mode.</param>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="32772" name="MAV_CMD_EMERGENCY_BRAKE">
+        <description>Emergency brake command. The drone will emergency braking without any acceleration limit.</description>
+        <param index="1">Empty</param>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="32773" name="VISION_MODULES_VERSION">
+        <description>Request vision modules version information.</description>
+        <param index="1">1: Request optical flow version</param>
+        <param index="2">1: Request realsense version</param>
+        <param index="3">Reserved (all remaining params)</param>
+      </entry>
+      <entry value="32774" name="MAV_CMD_FORCE_IPS_MODE">
+        <description>Force ips (indoor position system) mode, using optical flow instead of GPS.</description>
+        <param index="1">=0: disable; 1: enable.</param>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="32775" name="MAV_CMD_FORCE_MANUAL_MODE">
+        <description>Force manual (altitude control) mode, disable position control and the drone is controlled manually.</description>
+        <param index="1">0: disable; 1: enable.</param>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="32776" name="MAV_CMD_MOVEMENT">
+        <description>Make vehicle perform a simple movement.</description>
+        <param index="1">sub_mode, see enum(MOVEMENT_TYPE)</param>
+        <param index="2">Required distance of movement(in unit of 0.1m), or angle of turning(in degree). For CRUISE, 0:current velocity, 1:velocity increase by 10%, 2:velocity decrease by 10% </param>
+        <param index="3">This parameter is meaningful only when sub_mode set to CRUISE, indicating the cruising direction. see enum(CRUISE_DIRECTION)</param>
+        <param index="4">This parameter is meaningful only when sub_mode set to CRUISE, required velocity of cruise movement(unit:m/s)</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="32777" name="MAV_CMD_REQUEST_NFZ_UNLOCK_STATUS">
+        <description>Request the no-fly zone unlock status</description>
+        <param index="1">0: No action 1: Request the no-fly zone unlock status</param>
+        <param index="2">Reserved (all remaining params)</param>
+      </entry>
+      <entry value="32778" name="MAV_CMD_SPI_NAND_TEST">
+        <description>Test command of spi nand</description>
+        <param index="1">0: No action 1: Get spi nand id</param>
+        <param index="2">0: No action 1: Test the read/write/erase function of spi nand</param>
+        <param index="3">Reserved (all remaining params)</param>
+      </entry>
+      <entry value="32779" name="MAV_CMD_CINEMA_MODE">
+        <description>Enable or Disable Cinema mode</description>
+        <param index="1">0: Disable cinema mode 1: Enable cinema mode</param>
+        <param index="2">Reserved (all remaining params)</param>
+      </entry>
+      <entry value="32780" name="MAV_CMD_RESET_PARAM_EXPO">
+        <description>reset expo params about MPC_XY_MAN_EXPO, MPC_YAW_EXPO, MPC_Z_MAN_EXPO</description>
+        <param index="1">Reserved (all remaining params)</param>
+      </entry>
+      <entry value="32781" name="MAV_CMD_RESET_PARAM_SENSITIVITY">
+        <description>reset sensitivity params about MC_YAWRATE_MAX, MPC_JERK_MAX, MPC_ACC_HOR</description>
+        <param index="1">Reserved (all remaining params)</param>
+      </entry>
+      <entry value="32782" name="MAV_CMD_MISSION_CAMERA_TRIGGER">
+        <description>task mission camera trigger .</description>
+        <param index="1">The total number of photos taken at the current location.</param>
+        <param index="2">Number of layers.</param>
+        <param index="3">Number of shots per layer.</param>
+        <param index="4">Initial angle of the gimbal. The unit is angle.</param>
+        <param index="5">Angle diff between each layer. The unit is angle.</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="32783" name="MAV_CMD_REQUEST_VERSION_INFO">
+        <description>request component sw/hw version.</description>
+        <param index="1">Reserved (all remaining params)</param>
+      </entry>
+    </enum>
+    <enum name="FLIGHT_TASK">
+      <description> The advanced function mode.</description>
+      <entry value="0" name="FLIGHT_TASK_MANUAL">
+        <description>lying around the user.</description>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="1" name="FLIGHT_TASK_ORBIT">
+        <description>Flying around the user.</description>
+        <param index="2">=1, Pause the current task; =2 Continue/start the current task</param>
+        <param index="3">Around the radius, the unit is meters, range (5-50m)</param>
+        <param index="4">Flight velocity, unit is m/s,range (1-10).</param>
+        <param index="5">Surround direction, =0 clockwise rotation,=1 Anticlockwise rotation.</param>
+        <param index="6">=1 gimbal visual adjust.</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="2" name="FLIGHT_TASK_POI">
+        <description>Specify points of interest and fly around points of interest.</description>
+        <param index="2">=1, Pause the current task; =2 Continue/start the current task.</param>
+        <param index="3">Around the radius, the unit is meters, range (5-50m)</param>
+        <param index="4">Flight velocity, unit is m/s,range (1-10)</param>
+        <param index="5">Surround direction, =0 clockwise rotation, =1 Anticlockwise rotation.</param>
+        <param index="6">Choose how to draw points of interest, =0 Manually draw points of interest, =1 Automatically draw points of interest.</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="3" name="FLIGHT_TASK_JOUR">
+        <description>Journey mode,from a point according to the set distance, velocity, flight video.</description>
+        <param index="2">=1, Pause the current task; =2 Continue/start the current task</param>
+        <param index="3">One way flight distance, unit is meters, range (5-50m).</param>
+        <param index="4">One way flight velocity, unit is m/s, range (1-10).</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="4" name="FLIGHT_TASK_GPS_FOLLOW">
+        <description>Move through the gps follow the target.</description>
+        <param index="2">=1, Pause the current task; =2 Continue/start the current task.</param>
+        <param index="3">sub_mode, =0 follow me; =1 watch and follow me</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6"> =1, gimbal visuial adjust</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="5" name="FLIGHT_TASK_MISSION">
+        <description>Task mission</description>
+        <param index="2">=1, Pause the current task; =2 Continue/start the current task.</param>
+        <param index="3">sub_mode, see enum (CURVE_CABLE_CAM).</param>
+        <param index="4">Current waypoint velocity setpoint, the unit is m/s, The range is 1 to 10</param>
+        <param index="5">Direction of waypoint, =0 From back to front, =1 From front to back =</param>
+        <param index="6">Waypoint type, =0 Perform a waypoint in a straight line; =1 Perform a waypoint according to the curve</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="6" name="FLIGHT_TASK_AUTO_RECORD">
+        <description>auto record mode.</description>
+        <param index="2">=1, Pause the current task; =2 Continue/Start the current task</param>
+        <param index="3">sub_mode, see enum(AUTO_RECORD)</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="8" name="FLIGHT_TASK_FACE_RECOGNITION">
+        <description>face recognition mode.</description>
+        <param index="2">=1 Pause the current task; =2 Continue/Start the current task.</param>
+        <param index="3">face numbers. 0 : No face recognized.</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="9" name="FLIGHT_TASK_VISUAL_TRACKING">
+        <description>visual tracking.</description>
+        <param index="2">=1,Pause the current task; =2 Continue/start the current task</param>
+        <param index="3">Sub-mode under the visual tracking,see enum (VISUAL_TRACKING_MODE).</param>
+        <param index="4">Sub-mode for mix tracking =0 normal car tracking; =1 parallel car tracking</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="10" name="FLIGHT_TASK_NONE">
+        <description>No task is running</description>
+        <param index="2">The last error code which causes task exits</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="11" name="FLIGHT_TASK_MOVEMENT">
+        <description>simple movement</description>
+        <param index="2">current sub command, see enum(MOVEMENT_TYPE)</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="12" name="FLIGHT_TASK_PANORAMA">
+        <description>Panoramic photo.</description>
+        <param index="2">=1,Pause the current task; =2 Continue/start the current task</param>
+        <param index="3">Sub-mode under the panorama,see enum (PANORAMA_MODE).</param>
+        <param index="4">The number of photos required for each layer</param>
+        <param index="5">Number of layers to be executed</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="13" name="FLIGHT_TASK_SPORT">
+        <description>Sport mode</description>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="14" name="FLIGHT_TASK_AUTOTAKEOFF">
+        <description>Auto takeoff mode</description>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="15" name="FLIGHT_TASK_SMART">
+        <description>Smart mode</description>
+        <param index="2">Empty</param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+    </enum>
+    <enum name="PANORAMA_MODE">
+      <description>Sub-mode under the panorama mode.</description>
+      <entry value="0" name="ROTATE_UAV_YAW">
+        <description>Rotating yaw of the uav.</description>
+      </entry>
+      <entry value="1" name="ROTATE_GIMBAL_YAW">
+        <description>Rotating yaw of the gimbal.</description>
+      </entry>
+    </enum>
+    <enum name="VISUAL_TRACKING_MODE">
+      <description>Sub-mode under the visual tracking.</description>
+      <entry value="0" name="FIXED_VISUAL_TRACKING">
+        <description>fixed visual tracking, only rotating UAV yaw and gimbal pitch without following.</description>
+      </entry>
+      <entry value="1" name="NORMAL_VISUAL_TRACKING">
+        <description>normal visual tracking, both move UAV yaw and rotate gimbal pitch to follow.</description>
+      </entry>
+      <entry value="2" name="PARALLEL_VISUAL_TRACKING">
+        <description>Keep a certain relative position to follow.</description>
+      </entry>
+      <entry value="3" name="MIX_VISUAL_TRACKING">
+        <description>Both use visual and gps info to follow the target.</description>
+      </entry>
+    </enum>
+    <enum name="CURVE_CABLE_CAM">
+      <description>Sub-mode under the visual Curve Cable Cam.</description>
+      <entry value="0" name="MAP_DRAWING_POINT">
+        <description>Map drawing independent point pattern.</description>
+      </entry>
+      <entry value="1" name="MANUAL_MAN_POINT">
+        <description>Manual manufacturing of waypoints.</description>
+      </entry>
+      <entry value="2" name="MAP_DRAWING_PATTERB">
+        <description>Map drawing pattern.</description>
+      </entry>
+    </enum>
+    <enum name="AUTO_RECORD">
+      <description>Several sub modes under auto record</description>
+      <entry value="1" name="STRAIGHT_TOP">
+        <description>Go straight to the top.</description>
+      </entry>
+      <entry value="2" name="ROTATE_STRETCH">
+        <description>Rotate with vertical stretching.</description>
+      </entry>
+      <entry value="3" name="DELAY_PHO_SUR">
+        <description>Delay photography plus surround.</description>
+      </entry>
+      <entry value="4" name="DELAY_PHO_STR">
+        <description>Delay photography plus straight line flight.</description>
+      </entry>
+      <entry value="5" name="HOR_PAN_PHOTO">
+        <description>Horizontal panorama take photo.</description>
+      </entry>
+      <entry value="6" name="COM_PAN_PHOTO">
+        <description>Comprehensive panorama take photo.</description>
+      </entry>
+    </enum>
+    <enum name="MOVEMENT_TYPE">
+      <description>Simple move types for command MAV_CMD_MOVEMENT.</description>
+      <entry value="1" name="GO_FORWARD">
+        <description>Go forward in speed at 1m/s.</description>
+      </entry>
+      <entry value="2" name="GO_BACKWARD">
+        <description>Move backward in speed at 1m/s.</description>
+      </entry>
+      <entry value="3" name="GO_LEFT">
+        <description>Move to left in speed at 1m/s.</description>
+      </entry>
+      <entry value="4" name="GO_RIGHT">
+        <description>Move to right in speed at 1m/s.</description>
+      </entry>
+      <entry value="5" name="GO_UP">
+        <description>Flight upward in speed at 1m/s.</description>
+      </entry>
+      <entry value="6" name="GO_DOWN">
+        <description>Descend in speed at 1m/s.</description>
+      </entry>
+      <entry value="7" name="TURN_RIGHT">
+        <description>Turn right, max velocity 120 degree/s.</description>
+      </entry>
+      <entry value="8" name="TURN_LEFT">
+        <description>Turn left, max velocity 120 degree/s.</description>
+      </entry>
+      <entry value="9" name="CRUISE">
+        <description>The aircraft move along the current velocity and direction.</description>
+      </entry>
+    </enum>
+    <enum name="CRUISE_DIRECTION">
+      <description>Simple move types for command MAV_CMD_MOVEMENT.</description>
+      <entry value="0" name="FORWARD_CRUISE">
+        <description>Go forward fly.</description>
+      </entry>
+      <entry value="1" name="BACKWARD_CRUISE">
+        <description>Move backward fly.</description>
+      </entry>
+      <entry value="2" name="LEFT_CRUISE">
+        <description>Move to left fly.</description>
+      </entry>
+      <entry value="3" name="RIGHT_CRUISE">
+        <description>Move to right fly.</description>
+      </entry>
+    </enum>
+    <enum name="MAV_TASK_TYPE">
+      <description>task result type</description>
+      <entry value="0" name="MAV_TASK_FULL_ITEM">
+        <description>Request a full waypoint list.</description>
+      </entry>
+      <entry value="1" name="MAV_TASK_RESUME_ITEM">
+        <description>After downloading the waypoint is lost, request the route to resume.</description>
+      </entry>
+    </enum>
+    <enum name="MAV_TASK_RESULT">
+      <description>task result command</description>
+      <entry value="0" name="MAV_TASK_ACCEPTED">
+        <description>task accepted OK.</description>
+      </entry>
+      <entry value="1" name="MAV_TASK_ERROR">
+        <description>generic error/not accepting task mission commands at all right now.</description>
+      </entry>
+      <entry value="2" name="MAV_TASK_UNSUPPORTED_FRAM">
+        <description>coordinate frame is not supported.</description>
+      </entry>
+      <entry value="3" name="MAV_TASK_UNSUPPORTED">
+        <description>command is not supported.</description>
+      </entry>
+    </enum>
+    <enum name="TASK_MISSION_TYPE">
+      <description>The task waypoint type.</description>
+      <entry value="0" name="TASK_WAYPOINT">
+        <description>Items are waypoint.</description>
+      </entry>
+      <entry value="1" name="TASK_POINTS_INTEREST">
+        <description>Items are points of interest.</description>
+      </entry>
+      <entry value="2" name="TASK_TAKEOFF">
+        <description>Items are require take off</description>
+      </entry>
+      <entry value="3" name="TASK_DO_MOUNT_CONTROL">
+        <description>Items are do mount control</description>
+      </entry>
+      <entry value="4" name="TASK_IMAGE_START_CAPTURE">
+        <description>Items are start image capture</description>
+      </entry>
+      <entry value="5" name="TASK_IMAGE_STOP_CAPTURE">
+        <description>Items are stop image capture</description>
+      </entry>
+      <entry value="6" name="TASK_VIDEO_START_CAPTURE">
+        <description>Items are start video capture</description>
+      </entry>
+      <entry value="7" name="TASK_VIDEO_STOP_CAPTURE">
+        <description>Items are stop video capture</description>
+      </entry>
+      <entry value="8" name="TASK_DO_CHANGE_SPEED">
+        <description>Items are do change speed</description>
+      </entry>
+      <entry value="9" name="TASK_RETURN_TO_LAUNCH">
+        <description>Items are do RTL</description>
+      </entry>
+      <entry value="10" name="TASK_LAND">
+        <description>Items are do Land</description>
+      </entry>
+      <entry value="11" name="TASK_DO_SET_CAM_TRIGG_DIST">
+        <description>Items are trigger camera distance</description>
+      </entry>
+      <entry value="12" name="TASK_SET_CAMERA_MODE">
+        <description>Set camera mode</description>
+      </entry>
+    </enum>
+    <enum name="TASK_ACTION">
+      <description>The task action performed by mission.</description>
+      <entry value="0" name="TASK_ACTION_IDLE">
+        <description>idle.</description>
+      </entry>
+      <entry value="1" name="TASK_ACTION_TAKE_PHOTO">
+        <description>start take photos.</description>
+      </entry>
+      <entry value="2" name="TASK_ACTION_START_VIDEO">
+        <description>start video.</description>
+      </entry>
+      <entry value="3" name="TASK_ACTION_STOP_VIDEO">
+        <description>stop video.</description>
+      </entry>
+    </enum>
+    <enum name="TASK_STATE">
+      <description>Flight tasks state.</description>
+      <entry value="1" name="TASK_STATE_WAITING">
+        <description>The flight task mode is currently waiting</description>
+      </entry>
+      <entry value="2" name="TASK_STATE_RUNNING">
+        <description>sThe flight task mode is currently running.</description>
+      </entry>
+      <entry value="3" name="TASK_STATE_FINISH">
+        <description>The flight task mode is currently finished.</description>
+      </entry>
+      <entry value="4" name="TASK_STATE_NONE">
+        <description>The flight task mode is currently none.</description>
+      </entry>
+    </enum>
+    <enum name="TASK_MANAGE_CMD">
+      <description>Task mission manage command</description>
+      <entry value="0" name="TASK_MISSION_CLEAR_ALL">
+        <description>Clear all task mission item</description>
+      </entry>
+    </enum>
+    <enum name="TASK_MISSION_CLASS">
+      <description>Task mission class</description>
+      <entry value="0" name="TASK_MISSION_WAYPOINT">
+        <description>Task waypoint mission type</description>
+      </entry>
+    </enum>
+    <enum name="MAV_RC_COMMAND">
+      <description>Remote controller Instruction Set</description>
+      <entry value="1" name="MAV_RC_CMD_GET_BATTERY">
+        <description>Get Remote Controller Battery</description>
+      </entry>
+      <entry value="2" name="MAV_RC_CMD_GET_GPS">
+        <description>Get Remote Controller GPS</description>
+      </entry>
+      <entry value="3" name="MAV_RC_CMD_GET_GPS_TIME">
+        <description>Get Remote Controller GPS Time</description>
+      </entry>
+      <entry value="4" name="MAV_RC_CMD_GET_HW_INPUT_VAL">
+        <description>Get Remote Controller Hardware value</description>
+      </entry>
+      <entry value="5" name="MAV_RC_CMD_GET_CH_MAP">
+        <description>Get Remote Controller Joystick mode</description>
+      </entry>
+      <entry value="6" name="MAV_RC_CMD_SET_CH_MAP">
+        <description>Set Remote Controller Joystick Mode</description>
+      </entry>
+      <entry value="7" name="MAV_RC_CMD_GET_CH_CURVE">
+        <description>Get Remote Controller Channel Curve</description>
+      </entry>
+      <entry value="8" name="MAV_RC_CMD_SET_CH_CURVE">
+        <description>Set Remote Controller Channel Curve</description>
+      </entry>
+      <entry value="9" name="MAV_RC_CMD_GET_CHS_VAL">
+        <description>Get Remote Controller Channel Value</description>
+      </entry>
+      <entry value="10" name="MAV_RC_CMD_SET_CH_SETTING">
+        <description>Set Remote Controller Channel Value</description>
+      </entry>
+      <entry value="11" name="MAV_RC_CMD_SCAN_AUTOPILOT">
+        <description>Scan Aircraft</description>
+      </entry>
+      <entry value="12" name="MAV_RC_CMD_BIND_AUTOPILOT">
+        <description>Bind Aircraft</description>
+      </entry>
+      <entry value="13" name="MAV_RC_CMD_UNBIND_AUTOPILOT">
+        <description>Unbind Aircraft</description>
+      </entry>
+      <entry value="14" name="MAV_RC_CMD_GET_BIND_INFO">
+        <description>Get Aircraft Info(Binded)</description>
+      </entry>
+      <entry value="15" name="MAV_RC_CMD_EXIT_BIND">
+        <description>Exit Bind</description>
+      </entry>
+      <entry value="16" name="MAV_RC_CMD_SCAN_CAMERA">
+        <description>Scan Camera</description>
+      </entry>
+      <entry value="17" name="MAV_RC_CMD_BIND_CAMERA">
+        <description>Bind Camera</description>
+      </entry>
+      <entry value="18" name="MAV_RC_CMD_UNBIND_CAMERA">
+        <description>Unbind Camera</description>
+      </entry>
+      <entry value="19" name="MAV_RC_CMD_GET_CAMERA_INFO">
+        <description>Get Camera Info(Binded)</description>
+      </entry>
+      <entry value="20" name="MAV_RC_CMD_GET_SDCARD_INFO">
+        <description>Get Remote Controller SDcard Info</description>
+      </entry>
+      <entry value="21" name="MAV_RC_CMD_GET_CONTROL_TYPE">
+        <description>Get Remote Controller Type</description>
+      </entry>
+      <entry value="22" name="MAV_RC_CMD_GET_VERSION">
+        <description>Get Remote Controller Version</description>
+      </entry>
+      <entry value="23" name="MAV_RC_CMD_START_UPDATE">
+        <description>Start Update</description>
+      </entry>
+      <entry value="24" name="MAV_RC_CMD_TRANSFILEDATA">
+        <description>Segment Transmit Data</description>
+      </entry>
+      <entry value="25" name="MAV_RC_CMD_CANCEL_UPDATE">
+        <description>Cancel Update</description>
+      </entry>
+      <entry value="26" name="MAV_RC_CMD_SEND_MD5">
+        <description>Send MD5</description>
+      </entry>
+      <entry value="27" name="MAV_RC_CMD_GET_UPGRADE_STATUS">
+        <description>Get Update Status</description>
+      </entry>
+      <entry value="28" name="MAV_RC_CMD_GET_CH_SETTING">
+        <description>Gets Channel Configuration</description>
+      </entry>
+      <entry value="29" name="MAV_RC_CMD_SEND_PAYLOAD">
+        <description>Pass payload to aircraft by 2.4G</description>
+      </entry>
+      <entry value="30" name="MAV_RC_CMD_CALIBRATE">
+        <description>Start/Stop Calibrate</description>
+      </entry>
+      <entry value="31" name="MAV_RC_CMD_SET_GPS">
+        <description>Set Remote Controller GPS</description>
+      </entry>
+      <entry value="32" name="MAV_RC_CMD_GET_STATE">
+        <description>Get Remote Controller Status(Bind/Calibrate)</description>
+      </entry>
+      <entry value="96" name="MAV_RC_CMD_WRITE_SN">
+        <description>Write SN</description>
+      </entry>
+      <entry value="97" name="MAV_RC_CMD_READ_SN">
+        <description>Read SN</description>
+      </entry>
+      <entry value="98" name="MAV_RC_CMD_GET_RF_VERSION">
+        <description>Get RF Version</description>
+      </entry>
+      <entry value="99" name="MAV_RC_CMD_GPIO_SET">
+        <description>Set LED,Buzzer,Motor GPIO</description>
+      </entry>
+      <entry value="100" name="MAV_RC_CMD_SET_OSD">
+        <description>Set OSD Enable/Disable</description>
+      </entry>
+      <entry value="128" name="MAV_RC_MSG_TELEMETRY_DATA">
+        <description>Telemetry Data</description>
+      </entry>
+      <entry value="129" name="MAV_RC_MSG_REPORT_EVENT">
+        <description>Report</description>
+      </entry>
+      <entry value="130" name="MAV_RC_MSG_BYPASS_EX_PACKET">
+        <description>Transfer Extra or Feedback of Aircraft Package</description>
+      </entry>
+    </enum>
+    <enum name="MAV_RC_ERROR_CODE">
+      <entry value="0" name="MAV_RC_ERR_SUCCESS">
+        <description>Success</description>
+      </entry>
+      <entry value="1" name="MAV_RC_ERR_UNSUPPORT">
+        <description>Unsupport</description>
+      </entry>
+      <entry value="2" name="MAV_RC_ERR_INVAL_PARAM">
+        <description>Invalid param</description>
+      </entry>
+      <entry value="3" name="MAV_RC_ERR_INVAL_SETTING">
+        <description>Invalid Setting</description>
+      </entry>
+      <entry value="4" name="MAV_RC_ERR_BUSY">
+        <description>System Busy</description>
+      </entry>
+      <entry value="5" name="MAV_RC_ERR_NOT_MATCH">
+        <description>Version Not Match</description>
+      </entry>
+      <entry value="6" name="MAV_RC_ERR_GPS_NOT_FIXED">
+        <description>GPS Not Fixed</description>
+      </entry>
+      <entry value="254" name="MAV_RC_ERR_UNKNOW">
+        <description>Unknown Error</description>
+      </entry>
+    </enum>
+    <enum name="BAT_COMMAND_LIST">
+      <entry value="161" name="BAT_COMMAND_LIST_SYNCHRONIZE">
+        <description>0xA1 Host synchronize to battery..</description>
+      </entry>
+      <entry value="162" name="BAT_COMMAND_LIST_TURNOFF">
+        <description>0xA2 Host turns off battery.</description>
+      </entry>
+      <entry value="163" name="BAT_COMMAND_LIST_DEEPSLEEP">
+        <description>0xA3 Host takes battery into deep sleep, only chargeing can wake battery up.</description>
+      </entry>
+      <entry value="164" name="BAT_COMMAND_LIST_GENERALINFO">
+        <description>0xA4 Host gets general Information of battery.</description>
+      </entry>
+      <entry value="165" name="BAT_COMMAND_LIST_COMMONINFO">
+        <description>0xA5 Host gets common information of battery.</description>
+      </entry>
+      <entry value="166" name="BAT_COMMAND_LIST_CONSTINFO">
+        <description>0xA6 Host gets sonstant information of battery.</description>
+      </entry>
+      <entry value="167" name="BAT_COMMAND_LIST_BOOTRESET">
+        <description>0xA7 Host gets sonstant information of battery.</description>
+      </entry>
+    </enum>
+    <!-- ESTIMATOR_MODE_FLAGS - these values should be bit-and with the messages flags field to know if flag has been set -->
+    <enum name="ESTIMATOR_MODE_FLAGS">
+      <description>Flags in EKF_STATUS message</description>
+      <entry value="1" name="ESTIMATOR_TILT_ALIGNMENT">
+        <description>True if the filter tilt alignment is complete</description>
+      </entry>
+      <entry value="2" name="ESTIMATOR_YAW_ALIGNMENT">
+        <description>True if the filter yaw alignment is complete</description>
+      </entry>
+      <entry value="4" name="ESTIMATOR_GPS">
+        <description>True if GPS measurements are being fused</description>
+      </entry>
+      <entry value="8" name="ESTIMATOR_OPTICAL_FLOW">
+        <description>True if optical flow measurements are being fused</description>
+      </entry>
+      <entry value="16" name="ESTIMATOR_MAGNETIC_YAW">
+        <description>True if a simple magnetic yaw heading is being fused</description>
+      </entry>
+      <entry value="32" name="ESTIMATOR_MAGNETOMETER">
+        <description>True if 3-axis magnetometer measurement are being fused</description>
+      </entry>
+      <entry value="64" name="ESTIMATOR_SYNTHETIC_MAGNETIC">
+        <description>True if synthetic magnetic declination measurements are being fused</description>
+      </entry>
+      <entry value="128" name="ESTIMATOR_VEHICLE_AIRBORNE">
+        <description>True when the vehicle is airborne</description>
+      </entry>
+      <entry value="256" name="ESTIMATOR_WIND_VELOCITY">
+        <description>True when wind velocity is being estimated</description>
+      </entry>
+      <entry value="512" name="ESTIMATOR_BARO_ALT">
+        <description>True when baro height is being fused as a primary height reference</description>
+      </entry>
+      <entry value="1024" name="ESTIMATOR_RANGE_DISTANCE">
+        <description>True when range finder height is being fused as a primary height reference</description>
+      </entry>
+      <entry value="2048" name="ESTIMATOR_GPS_ALT">
+        <description>True when GPS height is being fused as a primary height reference</description>
+      </entry>
+      <entry value="8192" name="ESTIMATOR_LOCAL_POSITION_VISION">
+        <description>True when local position data from extern_al vision is being fused</description>
+      </entry>
+      <entry value="16384" name="ESTIMATOR_YAW_VISION">
+        <description>True when yaw data from external vision measurements is being fused</description>
+      </entry>
+      <entry value="32768" name="ESTIMATOR_ALT_VISION">
+        <description>True when height data from external vision measurements is being fused</description>
+      </entry>
+      <entry value="65536" name="ESTIMATOR_SYNTHETIC_SIDESLIP">
+        <description>True when synthetic sideslip measurements are being fused</description>
+      </entry>
+      <entry value="131072" name="ESTIMATOR_UPDATED_MAGNETOMETER">
+        <description>True when only the magnetic field states are updated by the magnetometer</description>
+      </entry>
+    </enum>
+  </enums>
+  <messages>
+    <message id="4000" name="VISUAL_TRACKING">
+      <description>The location of a visual tracking.</description>
+      <field type="uint64_t" name="time_usec">Timestamp (microseconds since boot or Unix epoch).</field>
+      <field type="uint8_t" name="track_quality">= 0: abnormal or lost; = 1: weak signal ; = 2: signal health.</field>
+      <field type="float" name="width">The width of the visual target (no unit).</field>
+      <field type="float" name="height">The height of the visual target (no unit).</field>
+      <field type="float" name="x">Upper left coordinate value x (normalized, no unit).</field>
+      <field type="float" name="y">Upper left coordinate value y (normalized, no unit).</field>
+      <field type="float" name="center_x">Center coordinate value x (normalized, no unit).</field>
+      <field type="float" name="center_y">Center coordinate value y (normalized, no unit).</field>
+    </message>
+    <message id="4001" name="TASK_UP_MIS">
+      <description>Upward link (Mission and POI)mission items.</description>
+      <field type="int16_t" name="index">waypoint sequence.</field>
+      <field type="int16_t" name="count">waypoint count.</field>
+      <field type="float" name="lat">waypoint latitude.</field>
+      <field type="float" name="lon">waypoint longitude.</field>
+      <field type="float" name="alt">waypoint altitude.</field>
+      <field type="float" name="gb_pitch">gimbal pitch value -1f..1f.</field>
+      <field type="float" name="uav_yaw">vehicle global yaw.</field>
+      <field type="float" name="action">vehicle and camera execution. see enum(TASK_ACTION).</field>
+      <field type="float" name="velocity">flight velocity, unit is meters.</field>
+    </message>
+    <message id="4002" name="TASK_DOWN_MIS">
+      <description>Down link (Mission and POI)mission items</description>
+      <field type="int16_t" name="index">waypoint sequence</field>
+      <field type="int16_t" name="count">waypoint count</field>
+      <field type="float" name="lat">waypoint latitude</field>
+      <field type="float" name="lon">waypoint longitude</field>
+      <field type="float" name="alt">waypoint altitude</field>
+      <field type="float" name="gb_pitch">gimbal pitch value -1f..1f</field>
+      <field type="float" name="uav_yaw">vehicle global yaw</field>
+      <field type="float" name="action">vehicle and camera execution. see enum(TASK_ACTION).</field>
+      <field type="float" name="velocity">flight velocity, unit is meters.</field>
+    </message>
+    <message id="4003" name="TASK_REQUEST_LIST">
+      <description>Request a waypoint command</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="type">request list type, see enum(MAV_TASK_TYPE)</field>
+    </message>
+    <message id="4004" name="TASK_ACK">
+      <description>Ack message during task mission handling.The type field states if this message is a positive ack(result=0) or if an error happened(result=non-zero).</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="result">ack result, see enum(MAV_TASK_RESULT)</field>
+    </message>
+    <message id="4005" name="TASK_STATE_FEEDBACK">
+      <description>Advanced function tasks mode and status feedback display.</description>
+      <field type="uint8_t" name="task_mode">Flight tasks mode, as defined by TASK_CMD enum</field>
+      <field type="uint8_t" name="task_state">Flight tasks state, as defined by TASK_STATE enum</field>
+      <field type="float" name="param1">Parameter 1, as defined by TASK_CMD enum.</field>
+      <field type="float" name="param2">Parameter 2, as defined by TASK_CMD enum.</field>
+      <field type="float" name="param3">Parameter 3, as defined by TASK_CMD enum.</field>
+      <field type="float" name="param4">Parameter 4, as defined by TASK_CMD enum.</field>
+      <field type="float" name="param5">Parameter 5, as defined by TASK_CMD enum.</field>
+      <field type="float" name="param6">Parameter 6, as defined by TASK_CMD enum.</field>
+      <field type="float" name="param7">Parameter 7, as defined by TASK_CMD enum.</field>
+    </message>
+    <message id="4006" name="VISION_MODULES_VERSIONS">
+      <description>Vision modules versions message.</description>
+      <field type="uint32_t" name="optical_software_version">Optical flow software version</field>
+      <field type="uint32_t" name="optical_hardware_version">Optical flow hardware version</field>
+      <field type="uint32_t" name="realsense_software_version">Realsense software version</field>
+      <field type="uint32_t" name="realsense_hardware_version">Realsense hardware version</field>
+    </message>
+    <message id="4007" name="ESTIMATOR_MODE_ADDITIONS">
+      <description>Integer bitmask indicating which valid data of EKF is fused. This message is added until proper support is added upstream.</description>
+      <field type="uint32_t" name="estimator_mode">Estimator mode flags according to the ESTIMATOR_MODE_FLAGS enum.</field>
+    </message>
+    <message id="4008" name="NO_FLY_ZONE_UNLOCKING">
+      <description>Unlock key for no-fly zone. The string is 0 terminated, 33 bytes. We will decrypt this key and decide whether to cancel the no-fly zone check.</description>
+      <field type="char[33]" name="no_fly_zone_key">Unlock key for no-fly zone.</field>
+    </message>
+    <message id="4009" name="YUNEEC_OPTICAL_FLOW_RAD">
+      <description>Optical flow from an angular rate flow sensor (e.g. PX4FLOW or mouse sensor)</description>
+      <field type="uint64_t" name="time_usec" units="us">Timestamp (microseconds, synced to UNIX time or since system boot)</field>
+      <field type="uint8_t" name="sensor_id">Sensor ID</field>
+      <field type="uint32_t" name="integration_time_us" units="us">Integration time in microseconds. Divide integrated_x and integrated_y by the integration time to obtain average flow. The integration time also indicates the.</field>
+      <field type="float" name="integrated_x" units="rad">Flow in radians around X axis (Sensor RH rotation about the X axis induces a positive flow. Sensor linear motion along the positive Y axis induces a negative flow.)</field>
+      <field type="float" name="integrated_y" units="rad">Flow in radians around Y axis (Sensor RH rotation about the Y axis induces a positive flow. Sensor linear motion along the positive X axis induces a positive flow.)</field>
+      <field type="float" name="integrated_xgyro" units="rad">RH rotation around X axis (rad)</field>
+      <field type="float" name="integrated_ygyro" units="rad">RH rotation around Y axis (rad)</field>
+      <field type="float" name="integrated_zgyro" units="rad">RH rotation around Z axis (rad)</field>
+      <field type="int16_t" name="temperature" units="cdegC">Temperature * 100 in centi-degrees Celsius</field>
+      <field type="uint8_t" name="quality">Optical flow quality / confidence. 0: no valid flow, 255: maximum quality</field>
+      <field type="uint32_t" name="time_delta_distance_us" units="us">Time in microseconds since the distance was sampled.</field>
+      <field type="float" name="distance" units="m">Distance to the center of the flow field in meters. Positive value (including zero): distance known. Negative value: Unknown distance.</field>
+      <field type="uint8_t" name="sonar_level"> sonar sensitivity level. 0 means the lowest amplifier regulation level. 255 means the biggest level</field>
+      <field type="uint8_t" name="luminance">optical flow luminance. 0 means the lowest brightness and 255 means the highest brightness. No specific unit for it.</field>
+      <field type="uint32_t" name="distance_count">count of sonar distance capture</field>
+    </message>
+    <message id="4010" name="NFZ_UNLOCK_STATUS">
+      <description>No-fly zone unlock status from flight control.</description>
+      <field type="uint8_t" name="status">unlock status 0: no unlock, 1: unlock success, 2: unlock success but the gps time is unknown, 3: unlock fail, the time limit is over, 4: unlock fail, the key is incorrect, 5: clear the saved unlock key is successful.</field>
+      <field type="uint32_t" name="uuid_verified">uuid generated by the no-fly zone unlock key, to be verified.</field>
+      <field type="uint32_t" name="time_limit" units="s">time limit generated by the no-fly zone unlock key, timestamp since 1.1.1970.</field>
+      <field type="uint32_t" name="board_uuid_h">the last 32bit board id number provided by hardware.</field>
+    </message>
+    <message id="4011" name="TASK_MISSION_ITEM">
+      <description>Upward link Curve waypoint items.</description>
+      <field type="int16_t" name="index">waypoint sequence.</field>
+      <field type="int16_t" name="count">waypoint count.</field>
+      <field type="int16_t" name="type">waypoint type, see enum(TASK_MISSION_TYPE).</field>
+      <field type="int8_t" name="frame">The coordinate system of the waypoint, see enum MAV_FRAME</field>
+      <field type="float" name="lat">waypoint latitude.</field>
+      <field type="float" name="lon">waypoint longitude.</field>
+      <field type="float" name="alt">waypoint altitude.</field>
+      <field type="float" name="gb_pitch">gimbal pitch value -1f..1f.</field>
+      <field type="float" name="gb_yaw">gimbal yaw angle, the uint is radian, the range is -PI ~ PI.</field>
+      <field type="float" name="uav_yaw">vehicle global yaw.</field>
+      <field type="float" name="action">vehicle and camera execution. see enum(TASK_ACTION).</field>
+      <field type="float" name="velocity">flight velocity, unit is meters.</field>
+      <field type="float" name="param1">Reserved </field>
+      <field type="float" name="param2">Reserved </field>
+      <field type="float" name="param3">Reserved </field>
+      <field type="float" name="param4">Reserved </field>
+    </message>
+    <message id="4012" name="TASK_MISSION_DOWN_MIS">
+      <description>Down link Curve waypoint items</description>
+      <field type="int16_t" name="index">waypoint sequence</field>
+      <field type="int16_t" name="count">waypoint count</field>
+      <field type="int16_t" name="type">waypoint type, see enum(TASK_MISSION_TYPE).</field>
+      <field type="float" name="lat">waypoint latitude</field>
+      <field type="float" name="lon">waypoint longitude</field>
+      <field type="float" name="alt">waypoint altitude</field>
+      <field type="float" name="gb_pitch">gimbal pitch value -1f..1f</field>
+      <field type="float" name="uav_yaw">vehicle global yaw</field>
+      <field type="float" name="action">vehicle and camera execution. see enum(TASK_ACTION).</field>
+      <field type="float" name="velocity">flight velocity, unit is meters.</field>
+      <field type="float" name="param1">Reserved </field>
+      <field type="float" name="param2">Reserved </field>
+      <field type="float" name="param3">Reserved </field>
+      <field type="float" name="param4">Reserved </field>
+    </message>
+    <message id="4013" name="YNC_PARAM_EXT_VALUE">
+      <description>Emit the value of a parameter. The inclusion of param_count and param_index in the message allows the recipient to keep track of received parameters and allows them to re-request missing parameters after a loss or timeout.</description>
+      <field type="uint8_t" name="param_type" enum="MAV_PARAM_EXT_TYPE">Parameter type.</field>
+      <field type="uint16_t" name="param_count">Total number of parameters</field>
+      <field type="uint16_t" name="param_index">Index of this parameter</field>
+      <field type="char[16]" name="param_id">Parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string</field>
+      <field type="char[128]" name="param_value">Parameter value</field>
+    </message>
+    <message id="4014" name="YNC_PARAM_EXT_SET">
+      <description>Set a parameter value. In order to deal with message loss (and retransmission of PARAM_EXT_SET), when setting a parameter value and the new value is the same as the current value, you will immediately get a PARAM_ACK_ACCEPTED response. If the current state is PARAM_ACK_IN_PROGRESS, you will accordingly receive a PARAM_ACK_IN_PROGRESS in response.</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="param_type" enum="MAV_PARAM_EXT_TYPE">Parameter type.</field>
+      <field type="char[16]" name="param_id">Parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string</field>
+      <field type="char[128]" name="param_value">Parameter value</field>
+    </message>
+    <message id="4015" name="YNC_PARAM_EXT_ACK">
+      <description>Response from a PARAM_EXT_SET message.</description>
+      <field type="uint8_t" name="param_type" enum="MAV_PARAM_EXT_TYPE">Parameter type.</field>
+      <field type="uint8_t" name="param_result" enum="PARAM_ACK">Result code.</field>
+      <field type="char[16]" name="param_id">Parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string</field>
+      <field type="char[128]" name="param_value">Parameter value (new value if PARAM_ACK_ACCEPTED, current value otherwise)</field>
+    </message>
+    <message id="4016" name="YNC_PARAM_EXT_REQUEST_READ">
+      <description>Request to read the value of a parameter with the either the param_id string id or param_index.</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="int16_t" name="param_index">Parameter index. Set to -1 to use the Parameter ID field as identifier (else param_id will be ignored)</field>
+      <field type="char[16]" name="param_id">Parameter id, terminated by NULL if the length is less than 16 human-readable chars and WITHOUT null termination (NULL) byte if the length is exactly 16 chars - applications have to provide 16+1 bytes storage if the ID is stored as string</field>
+    </message>
+    <message id="4017" name="YNC_PARAM_EXT_REQUEST_LIST">
+      <description>Request all parameters of this component. After this request, all parameters are emitted.</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+    </message>
+    <message id="4018" name="EXPOSURE_EVENT_REQUEST">
+      <description>Request all information cached by exposure event of this component. After this request, all information are emitted.</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+    </message>
+    <message id="4019" name="EXPOSURE_EVENT_ACK">
+      <description>Response from a EXPOSURE_EVENT_REQUEST message.</description>
+      <field type="uint32_t" name="week">week of event, 0 for unknown</field>
+      <field type="uint32_t" name="second">second of event, 0 for unknown</field>
+      <field type="uint32_t" name="subsecond">nano second of event, 0 for unknown</field>
+      <field type="double" name="lat">[deg] Latitude (WGS84)</field>
+      <field type="double" name="lon">[deg] Longitude (WGS84)</field>
+      <field type="int32_t" name="alt">[mm] Altitude (MSL). Positive for up</field>
+      <field type="float" name="lat_err">[m] Latitude error</field>
+      <field type="float" name="lon_err">[m] Longitude error</field>
+      <field type="float" name="alt_err">[m] Altitude error</field>
+      <field type="float" name="roll">[rad] Roll angle (-pi..+pi)</field>
+      <field type="float" name="pitch">[rad] Pitch angle (-pi..+pi)</field>
+      <field type="float" name="yaw">[rad] Yaw angle (-pi..+pi)</field>
+    </message>
+    <message id="4020" name="TASK_MISSION_ACK">
+      <description>Ack message during task mission handling.The type field states if this message is a positive ack(result=0) or if an error happened(result=non-zero).</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="result">Ack result, see enum(MAV_TASK_RESULT)</field>
+      <field type="uint8_t" name="task_mission_type">Returned task mission type, see enum (TASK_MISSION_TYPE)</field>
+      <field type="uint32_t" name="index">The index number of the task mission item</field>
+      <field type="float" name="param1">Reserved </field>
+      <field type="float" name="param2">Reserved </field>
+    </message>
+    <message id="4021" name="TASK_MISSION_STATE">
+      <description>Task mission state</description>
+      <field type="uint16_t" name="count">Count of task mission count</field>
+      <field type="uint16_t" name="current_seq">Current sequence</field>
+      <field type="uint16_t" name="interest_seq">Interest point sequence</field>
+      <field type="uint8_t" name="task_mission_type">enum(TASK_MISSION_CLASS)</field>
+      <field type="float" name="param1">Reserved</field>
+      <field type="float" name="param2">Reserved</field>
+      <field type="float" name="param3">Reserved</field>
+      <field type="float" name="param4">Reserved</field>
+    </message>
+    <message id="4022" name="TASK_MISSION_STATE_REQUEST">
+      <description>Task mission state request</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="task_mission_type">enum(TASK_MISSION_CLASS)</field>
+    </message>
+    <message id="4023" name="TASK_MISSION_MANAGE">
+      <description>Manage task mission such like delete, edit, insert task mission</description>
+      <field type="uint16_t" name="seq">task mission index</field>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="task_mission_type">enum(TASK_MISSION_CLASS)</field>
+      <field type="uint8_t" name="cmd">Task mission manage command</field>
+      <field type="float" name="param1">Reserved</field>
+      <field type="float" name="param2">Reserved</field>
+      <field type="float" name="param3">Reserved</field>
+      <field type="float" name="param4">Reserved</field>
+    </message>
+    <message id="4024" name="TASK_MISSION_REQUEST">
+      <description>Task mission request</description>
+      <field type="uint16_t" name="seq">task mission index</field>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="task_mission_type">enum(TASK_MISSION_CLASS)</field>
+    </message>
+    <message id="4025" name="TASK_MISSION_WAYPOINT_REACHED">
+      <description>A certain mission item has been reached</description>
+      <field type="uint16_t" name="seq">task mission index</field>
+    </message>
+    <message id="4026" name="CAMERA_NOTIFICATION_PANORAMA">
+      <description>Camera notification panorama photo has been completed.</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="result">0: Failed; 1: The Nth photo was taken successfully. 2: In progress.</field>
+      <field type="uint8_t" name="index">The number of the photos in one group.</field>
+      <field type="uint16_t" name="number">Total number of the photos taken successfully in one group.</field>
+    </message>
+    <message id="4027" name="MISSION_ACTION">
+      <description>mission action info</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="mission_action">0: new mission start; 1: mission continue. 2: mission completed.</field>
+      <field type="uint8_t" name="mission_id">0: unused; &gt;=1: used</field>
+    </message>
+    <message id="4028" name="MISSION_ACTION_ACK">
+      <description>mission action ACK</description>
+      <field type="uint8_t" name="result" enum="MAV_RESULT">Result of action</field>
+      <field type="char[10]" name="mission_folder">Folder name to store photo (valid only result is MAV_RESULT_ACCEPTED).</field>
+    </message>
+    <message id="4029" name="COMPONENT_VERSION_INFO">
+      <description>component version message.</description>
+      <field type="uint8_t" name="software_version_major">software version major number</field>
+      <field type="uint8_t" name="software_version_minor">software version minor number</field>
+      <field type="uint16_t" name="software_version_build">software version build number</field>
+      <field type="uint16_t" name="hardware_version">hardware version</field>
+    </message>
+    <message id="5000" name="GIMBAL_CONTROL">
+      <description>Gimbal control packet from flight control.</description>
+      <field type="int16_t[4]" name="quaternion">drone's quaternion, multiplied by 10000.</field>
+      <field type="int16_t" name="hvel">drone's horizontal velocity in cm/s unit.</field>
+      <field type="int16_t" name="hacc">drone's horizontal acceleration in cm/s/s unit.</field>
+      <field type="int16_t" name="yaw_deg_desire">Current yaw angular rate in of drone in 0.1*degrees/second.</field>
+      <field type="uint16_t" name="yaw_channel">yaw channel value,value range 0-4096,follow point ahead mode is none;degree = -((channel_value-2048)*0.03dgree+45dgree); velocity=-(channel_value-2130)/41 or velocity=-(channel_value-1966)/41 there has a lsb deadline.</field>
+      <field type="uint16_t" name="pitch_channel">pitch channel value,value range 0-4096,follow point ahead mode is none;degree = -((channel_value-2048)*0.03dgree+45dgree); velocity=-(channel_value-2130)/41 or velocity=-(channel_value-1966)/41 there has a lsb deadline.</field>
+      <field type="uint16_t" name="roll_channel">roll channel value,value range 0-4096,follow point ahead mode is none;degree = -((channel_value-2048)*0.03dgree+45dgree); velocity=-(channel_value-2130)/41 or velocity=-(channel_value-1966)/41 there has a lsb deadline.</field>
+      <field type="uint16_t" name="yaw_mode">yaw mode value, 410-820 is mode :follow point ahead;820-1229 is mode:follow point angle changeable, 1229-1638 is mode:follow point velocity  changeable,2048-2458 is mode:global angle changeable, 2867-3686 is mode: global velocity  changeable.</field>
+      <field type="uint16_t" name="pitch_mode">pitch mode value, 410-820 is mode :follow point  ahead;820-1229 is mode:follow point angle changeable, 1229-1638 is mode:follow point velocity  changeable,2048-2458 is mode:global angle changeable, 2867-3686 is mode: global velocity  changeable.</field>
+      <field type="uint16_t" name="roll_mode">roll mode value, 410-820 is mode :follow point  ahead;820-1229 is mode:follow point angle changeable, 1229-1638 is mode:follow point velocity  changeable,2048-2458 is mode:global angle changeable, 2867-3686 is mode: global velocity changeable.</field>
+    </message>
+    <message id="5001" name="GIMBAL_CONTROL_STANDARD">
+      <description>This packet is standard Gimbal control packet from remote controller or cell phone.</description>
+      <field type="uint8_t" name="priority">the priority of this control packet.range is 1~253,1 is the highest and 253 is lowest;self-control is 1,the packet send by GIMBAL_CONTROL is 10,and the packet send by GIMBAL_DEBUGDATA is 20,the others number belong to user. </field>
+      <field type="uint8_t" name="yaw_mode">yaw mode value,1 is follow_head,2 is follow_angle,3 is follow_velocity;4 is global_angle,5 is global_velocity.</field>
+      <field type="uint8_t" name="pitch_mode">pitch mode value,1 is follow_head,2 is follow_angle,3 is follow_velocity;4 is global_angle,5 is global_velocity.</field>
+      <field type="uint8_t" name="roll_mode">roll mode value,1 is follow_head,2 is follow_angle,3 is follow_velocity;4 is global_angle,5 is global_velocity.</field>
+      <field type="float" name="yaw_channel">yaw channel value,if yaw mode is angle ,this value is angle.if yaw mode is velocity,this value is velocity..</field>
+      <field type="float" name="pitch_channel"> pitch channel value,if pitch mode is angle ,this value is angle.if pitch mode is velocity,this value is velocity..</field>
+      <field type="float" name="roll_channel">roll channel value,if roll mode is angle ,this value is angle.if roll mode is velocity,this value is velocity..</field>
+      <field type="float" name="drones_yawvelocity_desire">drone's yaw desired anguler velocity.</field>
+    </message>
+    <message id="5002" name="GIMBAL_DEBUGDATA">
+      <description>Gimbal to PC, Gimbal debugdata packet(50 bytes).</description>
+      <field type="uint8_t" name="msg_type">gimbal debudata type.</field>
+      <field type="int8_t[49]" name="debug_data">gimbal debudata.</field>
+    </message>
+    <message id="5003" name="BOOTLOAD_DATA">
+      <description>Gimbal bootload data packet(133 bytes).</description>
+      <field type="int8_t[133]" name="bootload_data">gimbal bootload data.</field>
+    </message>
+    <message id="5004" name="GIMBAL_ADDITIONAL_ATTITUDE">
+      <description>Gimbal additional attitude data required by the camera.</description>
+      <field type="uint32_t" name="time_boot_ms">timesmap</field>
+      <field type="float" name="roll_relative">Roll angle relative to vehicle in degrees.</field>
+      <field type="float" name="pitch_relative">Pitch angle relative to vehicle in degrees.</field>
+      <field type="float" name="yaw_global">Global yaw angle estimate in degrees.</field>
+    </message>
+    <message id="6000" name="UPDATE_STATUS_FEEDBACK">
+      <description>Update status feedback for modules.</description>
+      <field type="uint8_t" name="target_system">System ID</field>
+      <field type="uint8_t" name="target_component">Component ID</field>
+      <field type="uint8_t" name="module_name">update module name, 1 is autopilot, 2 is gimbal, 3 is camera, 4 is remote controller, 5 is opticalflow, 6 is OTA bundle firmware</field>
+      <field type="uint8_t" name="update_status">update status, 0 is ready, 1 is in progress, 2 is finished, 3 is failed</field>
+      <field type="uint8_t" name="progress">update progress(percentage), value range 0-100, the real value is progress*0.01f</field>
+    </message>
+    <message id="7050" name="MAV_RC_CMD">
+      <description>MAV RC command.</description>
+      <field type="uint8_t" name="command" enum="MAV_RC_COMMAND"/>
+      <field type="uint8_t[254]" name="params"/>
+    </message>
+    <message id="7051" name="MAV_RC_CMD_ACK">
+      <description>MAV RC command ACK.</description>
+      <field type="uint8_t" name="command" enum="MAV_RC_COMMAND"/>
+      <field type="uint8_t" name="code" enum="MAV_RC_ERROR_CODE"/>
+      <field type="uint8_t[253]" name="params"/>
+    </message>
+    <message id="9002" name="BAT_GENERAL_INFO">
+      <description>command of host to battery.</description>
+      <field type="uint16_t" name="capacity" units="mAh">the full battery capacity in units mAh, it will reduce with usage.</field>
+      <field type="uint16_t" name="remCap" units="mAh">the predicted remaining battery capacity in units mAh.</field>
+      <field type="uint16_t" name="remSOC">the current capacity in percentage of capacity.</field>
+      <field type="int16_t" name="temperature" units="cdegC">the temperature of battery in units Centigrade.</field>
+      <field type="uint16_t" name="packVolt" units="mV">the pack voltage in units mV.</field>
+      <field type="uint16_t" name="allVolt" units="mV">sum of each cell voltage in units mV.</field>
+      <field type="uint16_t[12]" name="cellnVolt" units="mV">each cell voltage in units mV.</field>
+      <field type="uint16_t" name="health">the State-of-Health information of the battery in percentage of design capacity and design energy.</field>
+      <field type="uint32_t" name="alert">the warning items in discharge mode.</field>
+      <field type="uint8_t" name="onOff">the state of the key,which 0x00 indicates pulling up and 0xff indicates pulling down.</field>
+      <field type="uint16_t" name="cycle">the charge-discharge cycle number.</field>
+      <field type="uint16_t[12]" name="maxVn" units="mV">the maximum voltage of each cell has ever been experienced in units mV.</field>
+      <field type="uint16_t[12]" name="minVn" units="mV"> the minimum voltage of each cell has ever been experienced in units mV.</field>
+      <field type="int8_t" name="maxTem" units="cdegC">the max temperature of the battery has ever been experienced in units Centigrade.</field>
+      <field type="uint8_t" name="minTem" units="cdegC">the minimum temperature of the battery has ever been experienced in units Centigrade.</field>
+      <field type="int16_t" name="maxChargeCurrent" units="mA">the max charging current of the battery has ever been experienced in units 10mA.</field>
+      <field type="int16_t" name="maxDishargeCurrent" units="mA">the max discharging current of the battery has ever been experienced in units 10mA.</field>
+      <field type="uint16_t" name="numOfOverCharge">the overcharge times of the battery.</field>
+    </message>
+    <message id="9003" name="BAT_COMMON_INFO">
+      <description>command of host to battery.</description>
+      <field type="uint16_t" name="remCap" units="mAh">the predicted remaining battery capacity in units mAh.</field>
+      <field type="uint16_t" name="remSOC">the current capacity in percentage of design capacity.</field>
+      <field type="int16_t" name="temperature" units="cdegC">the temperature of battery in units Centigrade.</field>
+      <field type="uint16_t" name="packVolt" units="mV">the pack voltage in units mV.</field>
+      <field type="uint16_t[12]" name="cellnVolt" units="mAh">each cell voltage in units mV.</field>
+      <field type="int16_t" name="current" units="mA"> the measured current from coulomb counter in units 10mA.</field>
+      <field type="uint32_t" name="alert">the warning items in discharge mode.</field>
+      <field type="uint8_t" name="onOff">the state of the key,which 0x00 indicates pulling up and 0xff indicates pulling down.</field>
+    </message>
+    <message id="9004" name="BAT_CONST_INFO">
+      <description>The host sends the constant information to battery, the information indicate importent attribution.</description>
+      <field type="uint32_t" name="firmwareVersion">firmwareVersion. version 101 means 1.01</field>
+      <field type="uint32_t" name="bootloaderVersion">bootloaderVersion.version 101 means 1.01</field>
+      <field type="uint32_t" name="hardwareVersion">hardwareVersion.version 101 means 1.01</field>
+      <field type="uint32_t" name="firmwareSize">firmwareSize.the value of application in bytes</field>
+      <field type="uint8_t[11]" name="MCUType">MCU type.</field>
+      <field type="uint8_t[32]" name="companyOfBat">Name of our company</field>
+      <field type="uint8_t" name="nCell">The Cells of battery</field>
+      <field type="uint16_t" name="designCap" units="mAh">The battery design capacity in units mAh</field>
+    </message>
+    <message id="9006" name="BAT_PRODUCTION_INFO">
+      <description>Used to load the production information form PC when manufacture.</description>
+      <field type="uint8_t[10]" name="productionTime">Production time</field>
+      <field type="uint8_t[16]" name="keyOfBat">Key for checking whether the battery is legal.</field>
+    </message>
+  </messages>
+</mavlink>
